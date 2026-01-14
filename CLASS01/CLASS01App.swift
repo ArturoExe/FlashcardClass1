@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct CLASS01App: App {
+    
+    @StateObject private var store = DeckStore()
+    @AppStorage("darkMode") private var isDarkMode: Bool = false
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                DeckListView()
+            }
+            .preferredColorScheme(!isDarkMode ? .light : .dark)
+            .environmentObject(store)
+
         }
     }
 }
